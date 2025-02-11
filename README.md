@@ -12,7 +12,7 @@ Este projeto utiliza o microcontrolador **RP2040** para controlar um **servomoto
 - **180 graus** → Ciclo ativo de **2.400µs** (0,12% Duty Cycle).
 - **90 graus** → Ciclo ativo de **1.470µs** (0,0735% Duty Cycle).
 - **0 graus** → Ciclo ativo de **500µs** (0,025% Duty Cycle).
-- Em cada posição, o servomotor aguarda **2 segundos** antes de avançar para a próxima.
+- Em cada posição, o servomotor aguarda **5 segundos** antes de avançar para a próxima.
 
 ### Movimentação Suave
 - Após atingir cada posição predefinida, o sistema inicia um **ciclo de movimentação contínua**.
