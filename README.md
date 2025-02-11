@@ -41,10 +41,3 @@ Este projeto utiliza o microcontrolador **RP2040** para controlar um **servomoto
    - Após essa sequência, ele iniciará a movimentação suave entre os ângulos.
    - O LED RGB no **GPIO 12** pode apresentar variações dependendo do comportamento do PWM.
 
-## Observações
-- A movimentação do servomotor deve ocorrer de maneira **precisa e suave**.
-- Possíveis interferências no LED RGB devem ser analisadas para entender sua relação com o PWM.
-
----
-Este projeto demonstra o controle preciso de **servomotores com PWM no RP2040**, além de explorar possíveis interações com **outros periféricos**, como o **LED RGB**.
-
