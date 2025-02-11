@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "author": "Pedro Henrique Palmarella Rodrigues",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-pi-pico-w", "id": "pico", "top": -32.05, "left": -63.65, "attrs": {} },
+    { "type": "wokwi-servo", "id": "servo1", "top": -40.4, "left": 86.4, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 104.8,
+      "left": -200.2,
+      "rotate": 270,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 167.15,
+      "left": -144,
+      "attrs": { "value": "330" }
+    }
+  ],
+  "connections": [
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+    [ "servo1:GND", "pico:GND.8", "black", [ "v-19.2", "h-192.31" ] ],
+    [ "pico:3V3", "servo1:V+", "red", [ "h0" ] ],
+    [ "servo1:PWM", "pico:GP22", "green", [ "v57.8", "h-77.11" ] ],
+    [ "led1:A", "pico:GP12", "green", [ "h0" ] ],
+    [ "led1:C", "r1:1", "black", [ "h0" ] ],
+    [ "r1:2", "pico:GND.4", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
