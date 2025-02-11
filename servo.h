@@ -7,7 +7,7 @@
 const uint SERVO = 22;         // Pino do SERVO conectado
 const uint LED = 12;                 // Pino do LED conectado
 #define DIVIDER_PWM 125.0      // Divisor fracional do clock para o PWM
-#define DUTY_DELAY_INCIAL 2000 // Delay para os movimentos INICIAIS do SERVO
+#define DUTY_DELAY_INCIAL 5000 // Delay para os movimentos INICIAIS do SERVO
 #define DUTY_DELAY_SUAVE 10    // Delay para o movimento em ciclo do SERVO
 const uint16_t PERIOD = 20000; // Período/wrap do PWM (valor máximo do contador)
 const uint16_t DUTY_SUAVE = 5; // Incremento/decremento para o duty cycle do SERVO
