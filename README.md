@@ -2,6 +2,7 @@
 
 Este projeto utiliza o microcontrolador **RP2040** para controlar um **servomotor** via **PWM**, permitindo movimentá-lo entre **0 e 180 graus** de forma precisa. Além disso, uma rotina periódica foi implementada para uma movimentação suave entre os ângulos extremos.
 
+### Vídeo de apresentação: https://youtu.be/AjMG4Z95Q1s
 ## Funcionalidades Implementadas
 
 ### Definição da Frequência do PWM
