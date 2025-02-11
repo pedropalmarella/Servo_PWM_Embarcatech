@@ -28,7 +28,7 @@ Este projeto utiliza o microcontrolador **RP2040** para controlar um **servomoto
 
 O código é modularizado nos seguintes arquivos:
 
-- **`main.c`**: Função principal que configura o PWM e executa a movimentação do servomotor e LED.
+- **`pwm_serv.c`**: Função principal que configura o PWM e executa a movimentação do servomotor e LED.
 - **`servo.h`**: Definições das funções responsáveis pelo controle do servomotor e LED.
 - **Principais funções:**
   - `setup_pwm(pino)`: Configura o PWM para o pino desejado.
