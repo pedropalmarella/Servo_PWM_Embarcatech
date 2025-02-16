@@ -1,47 +1,58 @@
-# LEDs RGB e Display SSD1306 com Joystick + PWM
+Este projeto utiliza o microcontrolador **RP2040** para controlar um **servomotor** via **PWM**, permitindo movimentá-lo entre **0 e 180 graus** de forma precisa. Além disso, uma rotina periódica foi implementada para uma movimentação suave entre os ângulos extremos.
 
-Este projeto utiliza o microcontrolador **RP2040** para controlar dois **LEDs RGB**, exibir um **quadrado em um display SSD1306** e responder a um **joystick** para movimentar o quadrado e controlar a intensidade dos LEDs. Além disso, o projeto implementa um botão para alternar o estado de um LED verde e modificar a borda do display, bem como um botão adicional para ativar ou desativar o PWM dos LEDs.
+### Vídeo de apresentação: https://youtu.be/AjMG4Z95Q1s
+## Funcionalidades Implementadas
 
-### Funcionalidades Implementadas
+### Definição da Frequência do PWM
+- O PWM é configurado para **50Hz** (período de 20ms), adequado para controle de servomotores.
+- O **divisor de clock do PWM** foi definido como **125.0**, garantindo um funcionamento estável.
 
-#### Controle de LEDs RGB
-- **LED Azul**: O brilho do LED azul é controlado pelo eixo Y do joystick. 
-  - Quando o joystick está na posição central (valor 2048), o LED azul permanece apagado.
-  - À medida que o joystick é movido para cima (valores menores) ou para baixo (valores maiores), o LED aumenta seu brilho gradualmente, atingindo intensidade máxima nos extremos (0 e 4095).
-  
-- **LED Vermelho**: O brilho do LED vermelho é controlado pelo eixo X do joystick.
-  - Quando o joystick está na posição central (valor 2048), o LED vermelho permanece apagado.
-  - Movendo o joystick para a esquerda (valores menores) ou para a direita (valores maiores), o LED aumenta de brilho, sendo mais intenso nos extremos (0 e 4095).
+### Controle de Posições do Servomotor
+- **180 graus** → Ciclo ativo de **2.400µs** (0,12% Duty Cycle).
+- **90 graus** → Ciclo ativo de **1.470µs** (0,0735% Duty Cycle).
+- **0 graus** → Ciclo ativo de **500µs** (0,025% Duty Cycle).
+- Em cada posição, o servomotor aguarda **5 segundos** antes de avançar para a próxima.
 
-- Ambos os LEDs são controlados via **PWM** para permitir uma variação suave da intensidade luminosa.
+### Movimentação Suave
+- Após atingir cada posição predefinida, o sistema inicia um **ciclo de movimentação contínua**.
+- A movimentação entre **0 e 180 graus** ocorre suavemente, com **incrementos de 5µs** no ciclo ativo e um **atraso de 10ms** entre cada incremento.
+- A rotina de movimentação é implementada na função ciclo_servo(), garantindo transições suaves e controladas.
 
-#### Controle do Display SSD1306
-- Um **quadrado 8x8 pixels** será exibido no display SSD1306, inicialmente centralizado.
-- O quadrado se moverá de forma proporcional aos valores capturados pelos eixos X e Y do joystick.
+### Integração com LED RGB (GPIO 12)
+- O comportamento do **LED RGB** é monitorado durante a execução do código.
+- O LED **reproduz a mesma movimentação do servomotor**, alterando seu brilho proporcionalmente.
+- A função experimento_led() aplica a mesma lógica do PWM ao LED.
 
-#### Botões do Joystick e Funcionalidades Adicionais
-- **Botão do Joystick** (GPIO 22):
-  - Alterna o estado do **LED Verde** a cada acionamento.
-  - Modifica a borda do display, alternando entre 2 estilos a cada novo acionamento.
-  
-- **Botão A** (GPIO 5):
-  - Ativa ou desativa os **LEDs PWM** a cada acionamento.
-  
-- **Botão B** (GPIO 6):
-  - Entra no modo BOOTSEL
+## Estrutura do Código
 
-## Desafios do Código
-Criar, centralizar o quadrado e delimitar seu movimento dentro do display foi um verdadeiro desafio, pois os valores ADC do joystick são muito altos, então foi necessário fazer uma divisão para que os valores fossem traduzidos corretamente, também foi criado uma condição que delimita o quadrado dentro do display, na qual caso o valor X ou Y passassem do limite, os mesmos seriam lidos como o valor limite.
+O código é modularizado nos seguintes arquivos:
+
+- **pwm_serv.c**: Função principal que configura o PWM e executa a movimentação do servomotor e LED.
+- **servo.h**: Definições das funções responsáveis pelo controle do servomotor e LED.
+- **Principais funções:**
+  - setup_pwm(pino): Configura o PWM para o pino desejado.
+  - movimento_inicial(pino): Realiza os movimentos iniciais do servo.
+  - ciclo_servo(pino): Implementa a movimentação periódica suave.
+  - experimento_led(pino): Aplica a lógica do PWM ao LED RGB.
 
 ## Tecnologias Utilizadas
 
 - **Microcontrolador**: Raspberry Pi Pico (RP2040)
 - **Linguagem de Programação**: C (usando o **Pico SDK**)
 - **Ambiente de Desenvolvimento**: Visual Studio Code (VSCode) com Pico SDK
+- **Simulador Wokwi**
 - **Hardware**:
-  - **LED RGB** (pinos GPIO 11, 12, 13)
-  - **Botão do Joystick** (GPIO 22)
-  - **Joystick** (GPIO 26 e 27)
-  - **Botão A** (GPIO 5)
-  - **Botão B** (GPIO 6)
-  - **Display SSD1306** (via I2C, GPIO 14 e GPIO 15)
+  - **Servomotor**
+  - **LED RGB (GPIO 12)**
+
+## Como Usar
+
+1. **Simulação no Wokwi**:
+   - O projeto foi testado e validado no simulador **Wokwi**.
+   - O código pode ser carregado no Wokwi para testar o comportamento do PWM e do servomotor virtualmente.
+   - As configurações de hardware estão descritas no arquivo **diagram.json**.
+
+2. **Monitorar o funcionamento**:
+   - O servomotor se movimentará entre **0°, 90° e 180°**.
+   - Após essa sequência, ele iniciará a movimentação suave entre os ângulos.
+   - O LED RGB no **GPIO 12** pode apresentar variações de brilho conforme o comportamento do PWM.
