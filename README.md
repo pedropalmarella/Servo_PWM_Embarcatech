@@ -31,7 +31,7 @@ Este projeto utiliza o microcontrolador **RP2040** para controlar dois **LEDs RG
   - Entra no modo BOOTSEL
 
 ## Desafios do Código
-Criar, centralizar o quadrado e delimitar seu movimento dentro do display foi um verdadeiro desafio, pois os valores ADC do joystick são muito altos, então foi necessário fazer uma divisão para que os valores fossem traduzidos corretamente, também foi criado uma condição que delimita o quadrado dentro do display, na qual caso o valor X ou Y passassem do limite, os mesmos seriam lidos como o valor limite
+Criar, centralizar o quadrado e delimitar seu movimento dentro do display foi um verdadeiro desafio, pois os valores ADC do joystick são muito altos, então foi necessário fazer uma divisão para que os valores fossem traduzidos corretamente, também foi criado uma condição que delimita o quadrado dentro do display, na qual caso o valor X ou Y passassem do limite, os mesmos seriam lidos como o valor limite.
 
 ## Tecnologias Utilizadas
 
